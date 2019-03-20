@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>First Flask Application</title>
+</head>
+<body>
+    <p>Sepal Length<input type="number" step="0.1" id="sepal_length"/></p>
+    <p>Sepal Width<input type="number" step="0.1" id="sepal_width"/></p>
+    <p>Petal Length<input type="number" step="0.1" id="petal_length"/></p>
+    <p>Petal Width<input type="number" step="0.1" id="petal_width"/></p>
+    <button onclick="myFunction()">Submit</button>
+     <p id="demo"></p>
+<script>
+function myFunction(){
+    var sep_len = document.getElementById("sepal_length").value
+    var sep_wid = document.getElementById("sepal_width").value
+    var pet_len = document.getElementById("petal_length").value
+    var pet_wid = document.getElementById("petal_width").value
+fetch('http://127.0.0.1:5000/hello/'+sep_len+'/'+sep_wid+'/'+pet_len+'/'+pet_wid)
+    .then(res => res.json())
+    .then((out) => {
+        document.getElementById("demo").innerHTML = out.specie;
+        console.log('Output: ', out);
+}).catch(err => console.error(err));
+}
+</script>
+</body>
+</html>
